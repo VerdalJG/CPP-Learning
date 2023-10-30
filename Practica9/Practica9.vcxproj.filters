@@ -21,7 +21,7 @@
     <ClCompile Include="CList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Practica5\FileUtils.cpp">
+    <ClCompile Include="FileUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClInclude Include="CList.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Practica5\FileUtils.h">
+    <ClInclude Include="FileUtils.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
