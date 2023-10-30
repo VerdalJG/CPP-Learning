@@ -1,6 +1,59 @@
 #include <iostream>
 #include "FileUtils.h"
 
+// Forward declarations for readability
+int FindRepetitions(FileUtils::CFile _oFile, char* _pString);
+int AddNumbersInFile(FileUtils::CFile _oFile);
+
+int main()
+{
+    // Practica 5 - Open, Read, Write, Close
+
+    FileUtils::CFile oFile1;
+
+    if (oFile1.OpenFile("filetest.txt", "r+"))
+    {
+        printf("File opened!\n");
+    }
+    else
+    {
+        printf("Failed to open file!\n");
+    }
+
+    char sBuffer[128];
+    unsigned int uNumReads = oFile1.ReadFile(sBuffer, 128);
+    sBuffer[uNumReads] = '\0';
+
+    // Writing functionality, can uncomment, works fine
+
+    //char sToWrite[] = "YAY";
+    //WriteFile(sToWrite, sizeof(sToWrite), pFile);
+
+    printf("%s\n", sBuffer);
+
+    if (oFile1.CloseFile())
+    {
+        printf("Successfully closed file\n");
+    }
+    else 
+    {
+        printf("Failed to close file\n");
+    }
+
+    // Practica 6: part 1 - String repetitions in file
+    FileUtils::CFile oFile2;
+    oFile2.OpenFile("filetest.txt", "r+");
+    char sToCheck[] = "idkc";
+    printf("Amount of repetitions of 'idkc': %i\n", FindRepetitions(oFile2, sToCheck));
+    oFile2.CloseFile();
+
+    // Practica 6: part 2 - Add integers in file
+    FileUtils::CFile oFile3;
+    oFile3.OpenFile("filetest.txt", "r+");
+    printf("Sum of all numbers: %i\n", AddNumbersInFile(oFile3));
+    oFile3.CloseFile();
+}
+
 int FindRepetitions(FileUtils::CFile _oFile, char* _pString)
 {
     unsigned int result = 0;
@@ -60,66 +113,13 @@ int AddNumbersInFile(FileUtils::CFile _oFile)
             }
             uIndex += uIndexToAdvance;
         }
-        else 
+        else
         {
             uIndex++;
         }
 
     }
     return result;
-}
-
-int main()
-{
-    // Practica 5 - Open, Read, Write, Close
-
-    FileUtils::CFile oFile1;
-
-    if (oFile1.OpenFile("filetest.txt", "r+"))
-    {
-        printf("File opened!\n");
-    }
-    else
-    {
-        printf("Failed to open file!\n");
-    }
-
-    char sBuffer[128];
-    unsigned int uNumReads = oFile1.ReadFile(sBuffer, 128);
-    sBuffer[uNumReads] = '\0';
-
-    // Writing functionality, can uncomment, works fine
-
-    //char sToWrite[] = "YAY";
-    //WriteFile(sToWrite, sizeof(sToWrite), pFile);
-
-    printf("%s\n", sBuffer);
-
-    if (oFile1.CloseFile())
-    {
-        printf("Successfully closed file\n");
-    }
-    else 
-    {
-        printf("Failed to close file\n");
-    }
-
-    // Practica 6: part 1 - String repetitions in file
-    FileUtils::CFile oFile2;
-    oFile2.OpenFile("filetest.txt", "r+");
-    char sToCheck[] = "idkc";
-    printf("Amount of repetitions of 'idkc': %i\n", FindRepetitions(oFile2, sToCheck));
-    oFile2.CloseFile();
-
-    // Practica 6: part 2 - Add integers in file
-    FileUtils::CFile oFile3;
-    oFile3.OpenFile("filetest.txt", "r+");
-    printf("Sum of all numbers: %i\n", AddNumbersInFile(oFile3));
-    oFile3.CloseFile();
-
-  
-
-    
 }
 
 
