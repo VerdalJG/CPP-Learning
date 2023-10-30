@@ -1,21 +1,24 @@
 #include <iostream>
-#include "CList.h"
+#include "TList.h"
 #include "FileUtils.h"
 
 int main()
 {
-    CList oList;
+    TList oList;
     oList.Push("First");
     oList.Push("Second");
     oList.Push("Third");
     oList.Push("Last");
 
+    // 1 - Copy Constructor call + check for copy
+    TList list2 = oList;
 
-    const char* pString = oList.First();
+    const char* pString = list2.First();
     while (pString != nullptr)
     {
         printf("%s\n", pString);
-        pString = oList.Next();
+        pString = list2.Next();
     }
+
 }
 

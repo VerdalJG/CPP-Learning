@@ -9,7 +9,7 @@ namespace FileUtils
 		CloseFile();
 
 		std::FILE* pFile;
-		pFile = fopen(path, mode);
+		fopen_s(&pFile, path, mode);
 
 		if (pFile)
 		{

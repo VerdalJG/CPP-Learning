@@ -140,12 +140,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CList.cpp" />
+    <ClCompile Include="TList.cpp" />
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="Practica9.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CList.h" />
+    <ClInclude Include="TList.h" />
     <ClInclude Include="FileUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

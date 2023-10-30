@@ -18,7 +18,7 @@
     <ClCompile Include="Practica9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CList.cpp">
+    <ClCompile Include="TList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileUtils.cpp">
@@ -26,7 +26,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CList.h">
+    <ClInclude Include="TList.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="FileUtils.h">

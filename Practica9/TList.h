@@ -1,31 +1,32 @@
 #pragma once
 
-class CListNode
+class TListNode
 {
 public:
 	// Constructors
-	CListNode(const char* _string);
-	~CListNode();
+	TListNode(const char* _string);
+	TListNode(TListNode& _tListNode);
+	~TListNode();
 
 
 	// To do: Variables... make them private?
-	CListNode* m_pNext = nullptr;
+	TListNode* m_pNext = nullptr;
 	const char* m_pString = nullptr;
 };
 
 
-class CList
+class TList
 {
 public:
-	CList();
+	TList();
 
-	CList(CList& _CList);
+	TList(TList& _CList);
 
-	CList GetReverseList(CList _list);
+	//TList GetReverseList(TList _list);
 
 	unsigned int Size(); // Returns the number of elements in the list
 
-	int Push(const char* sToPush); // Adds a string to the list
+	int Push(const char* sToPush); // Adds an element to the list, placing it first
 
 	const char* First(); // Returns the first element from the list
 
@@ -39,7 +40,7 @@ public:
 
 private:
 	int m_uSize;
-	CListNode* m_pFirst;
-	CListNode* m_pCurrent;
+	TListNode* m_pFirst;
+	TListNode* m_pCurrent;
 };
 
