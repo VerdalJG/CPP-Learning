@@ -35,3 +35,7 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# matches any files and directories with the name test
+.vs/
+Debug/
