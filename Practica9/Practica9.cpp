@@ -2,8 +2,6 @@
 #include "TList.h"
 #include "FileUtils.h"
 
-TList GetReverseList(TList _list);
-
 int main()
 {
     TList oList;
@@ -11,6 +9,7 @@ int main()
     oList.Push("Second");
     oList.Push("Third");
     oList.Push("Last");
+
 
     // 1 - Copy Constructor call + check for copy
     TList list2 = oList;
@@ -22,21 +21,27 @@ int main()
         pString = list2.Next();
     }
 
+
     // 2 - Reverse List 
-    GetReverseList(oList);
-}
+    TList reversedList;
 
-TList GetReverseList(TList _list)
-{
-    TList result;
-    const char* pString = _list.First();
+    reversedList = reversedList.GetReverseList(oList);
 
-    while (pString != nullptr)
+    const char* pString2 = reversedList.First();
+    while (pString2 != nullptr)
     {
-        printf("%s\n", pString);
-        pString = result.Next();
+        printf("%s\n", pString2);
+        pString2 = reversedList.Next();
     }
 
-    return result;
+    const char* pString3 = oList.First();
+    while (pString3 != nullptr)
+    {
+        printf("%s\n", pString3);
+        pString3 = oList.Next();
+    }
+
 }
+
+
 

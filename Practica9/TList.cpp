@@ -7,11 +7,22 @@ TListNode::TListNode(const char* _string)
 	//printf("Node Default Constructor\n");
 }
 
-TListNode::TListNode(TListNode& _tListNode)
-	: m_pString(_tListNode.m_pString)
-	, m_pNext(_tListNode.m_pNext)
+TListNode::TListNode(const TListNode& _tListNode)
 {
-	printf("Node Copy Constructor\n");
+	m_pNext = nullptr;
+	m_pString = nullptr;
+
+	if (_tListNode.m_pString)
+	{
+		m_pString = new char[strlen(_tListNode.m_pString) + 1];
+		strcpy(const_cast<char*>(m_pString), _tListNode.m_pString);
+	}
+	else
+	{
+		m_pString = nullptr;
+	}
+
+	//printf("Node Copy Constructor\n");
 }
 
 
@@ -26,14 +37,34 @@ TList::TList()
 	, m_pFirst(nullptr)
 	, m_pCurrent(nullptr)
 {
-	printf("TList Default Constructor\n");
+	//printf("TList Default Constructor\n");
 }
 
-TList::TList(TList& _TList)
-	: m_uSize(_TList.m_uSize)
-	, m_pFirst(_TList.m_pFirst)
-	, m_pCurrent(_TList.m_pCurrent)
+TList::TList(const TList& _list)
+	: m_uSize(_list.m_uSize)
+	, m_pFirst(nullptr)
+	, m_pCurrent(nullptr)
 {
+	if (_list.m_pFirst)
+	{
+		m_pFirst = new TListNode(_list.m_pFirst->m_pString);
+		TListNode* currentNode = m_pFirst;
+		TListNode* sourceNode = _list.m_pFirst->m_pNext;
+
+		while (sourceNode) 
+		{
+			// Create a new node and copy the contents of the source node
+			currentNode->m_pNext = new TListNode(*(sourceNode));
+			currentNode = currentNode->m_pNext;
+			sourceNode = sourceNode->m_pNext;
+		}
+	}
+	else
+	{
+		m_pFirst = nullptr;
+	}
+	m_pCurrent = m_pFirst;
+
 	printf("TList Copy Constructor\n");
 }
 
@@ -113,4 +144,23 @@ void TList::Reset()
 	{
 		Pop();
 	}
+}
+
+TList TList::GetReverseList(TList _list) 
+{
+	TList result = _list;
+	TListNode* previous = nullptr;
+	TListNode* current = result.m_pFirst;
+	TListNode* next = nullptr;
+	
+	while (current != nullptr)
+	{
+		next = current->m_pNext;
+		current->m_pNext = previous;
+		previous = current;
+		current = next;
+	}
+	result.m_pFirst = previous;
+
+	return result;
 }

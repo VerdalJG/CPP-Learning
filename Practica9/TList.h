@@ -5,7 +5,7 @@ class TListNode
 public:
 	// Constructors
 	TListNode(const char* _string);
-	TListNode(TListNode& _tListNode);
+	TListNode(const TListNode& _tListNode);
 	~TListNode();
 
 
@@ -20,7 +20,7 @@ class TList
 public:
 	TList();
 
-	TList(TList& _CList);
+	TList(const TList& _list);
 
 	//TList GetReverseList(TList _list);
 
@@ -35,6 +35,8 @@ public:
 	const char* Pop(); // Eliminates 1st element from the list and returns it
 
 	void Reset(); // Eliminate all list elements
+
+	TList GetReverseList(TList _list); // Returns a new list with reversed elements
 
 
 
