@@ -36,7 +36,7 @@ public:
 
 	void Reset(); // Eliminate all list elements
 
-	TList GetReverseList(TList _list); // Returns a new list with reversed elements
+	void GetReverseList(); // Returns a new list with reversed elements
 
 
 

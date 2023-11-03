@@ -68,11 +68,6 @@ TList::TList(const TList& _list)
 	printf("TList Copy Constructor\n");
 }
 
-//TList TList::GetReverseList(TList _list)
-//{
-//	  return TList();
-//}
-
 unsigned int TList::Size()
 {
 	return m_uSize;
@@ -146,11 +141,10 @@ void TList::Reset()
 	}
 }
 
-TList TList::GetReverseList(TList _list) 
+void TList::GetReverseList() 
 {
-	TList result = _list;
 	TListNode* previous = nullptr;
-	TListNode* current = result.m_pFirst;
+	TListNode* current = m_pFirst;
 	TListNode* next = nullptr;
 	
 	while (current != nullptr)
@@ -160,7 +154,5 @@ TList TList::GetReverseList(TList _list)
 		previous = current;
 		current = next;
 	}
-	result.m_pFirst = previous;
-
-	return result;
+	m_pFirst = previous;
 }

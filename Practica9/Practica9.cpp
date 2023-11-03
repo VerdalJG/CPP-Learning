@@ -46,9 +46,9 @@ int main()
 
 
     // 2 - Reverse List 
-    TList reversedList;
+    TList reversedList = oList;
 
-    reversedList = reversedList.GetReverseList(oList);
+    reversedList.GetReverseList();
 
     const char* pString2 = reversedList.First();
     while (pString2 != nullptr)
@@ -57,6 +57,7 @@ int main()
         pString2 = reversedList.Next();
     }
 
+    // Check that original list is still the same
     const char* pString3 = oList.First();
     while (pString3 != nullptr)
     {
