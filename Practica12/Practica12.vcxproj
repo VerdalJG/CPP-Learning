@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="MyString.cpp" />
     <ClCompile Include="Practica12.cpp" />
+    <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyString.h" />
