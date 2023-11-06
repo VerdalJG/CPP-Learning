@@ -36,7 +36,7 @@ CMyString::CMyString(const CMyString &strScr)
 // ********************************************************************
 void CMyString::Init(const char *pszString)
 {
-	m_uLen			= 0;
+	m_uLen = 0;
 	m_pszBuffer = NULL;	
 
 	printf("CMyString::CMyString(const char *pszString): %s\n", pszString);

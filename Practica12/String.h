@@ -59,6 +59,6 @@ public:
     static CString Read(const CString& filename);
     void Write(const CString& filename, bool append = true) const;
 private:
-		void *m_p;
+		void *m_ptrString;
 };
 
