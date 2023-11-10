@@ -25,167 +25,150 @@ void VFCTank::Update()
 		}
 	}
 
-	if (GetBullet() == nullptr)
+	if (bullet != nullptr) // Dodge mode
 	{
-		int targetX = pTarget->GetPosX();
-		int targetY = pTarget->GetPosY();
-		if (std::abs(GetPosX() - targetX) < 5)
+
+	int enemyBulletX = bullet->iX;
+	int enemyBulletY = bullet->iY;
+	EDirection enemyBulletDirection = bullet->eDirection;
+		switch (enemyBulletDirection)
 		{
-			if (GetPosY() > targetY)// I am below
+		case EDirection::Down:
+			if (GetPosY() > enemyBulletY && std::abs(GetPosX() - enemyBulletX < 4))
 			{
-				eDesiredLookDirection = EDirection::Up;
-			}
-			else
-			{
-				eDesiredLookDirection = EDirection::Down;
-			}
-			if (std::abs(GetPosY() - targetY) < 10)
-			{
-				eDesiredAction = EAction::Shoot;
-			}
-			else
-			{
-				eDesiredAction = EAction::Shoot;
-			}
-			
-		}
-		else if (std::abs(GetPosY() - targetY) < 2) // Same height - ish
-		{
-			if (GetPosX() > targetX)
-			{
-				eDesiredLookDirection = EDirection::Left;
-			}
-			else
-			{
-				eDesiredLookDirection = EDirection::Right;
-					
-			}
-			if (std::abs(GetPosX() - targetX) < 10)
-			{
-				eDesiredAction = EAction::Shoot;
-			}
-			else
-			{
-				eDesiredAction = EAction::Shoot;
-			}
-		}
-		else
-		{
-			if (std::abs(GetPosY() - targetY) < std::abs(GetPosX() - targetX))
-			{
-				if (GetPosY() < targetY)
-				{
-					eDesiredLookDirection = EDirection::Down;
-				}
-				else
-				{
-					eDesiredLookDirection = EDirection::Up;
-				}
-				eDesiredAction = EAction::Move;
-			}
-			else
-			{
-				if (GetPosX() < targetX)
+				if (GetPosX() > enemyBulletX)
 				{
 					eDesiredLookDirection = EDirection::Right;
 				}
 				else
 				{
 					eDesiredLookDirection = EDirection::Left;
+
 				}
 				eDesiredAction = EAction::Move;
 			}
+			break;
+		case EDirection::Up:
+			if (GetPosY() < enemyBulletY && std::abs(GetPosX() - enemyBulletX < 4))
+			{
+				if (GetPosX() > enemyBulletX)
+				{
+					eDesiredLookDirection = EDirection::Right;
+				}
+				else
+				{
+					eDesiredLookDirection = EDirection::Left;
+
+				}
+				eDesiredAction = EAction::Move;
+			}
+			break;
+		case EDirection::Left:
+			if (GetPosX() < enemyBulletX && std::abs(GetPosY() - enemyBulletY < 2))
+			{
+				if (GetPosY() > enemyBulletY)
+				{
+					eDesiredLookDirection = EDirection::Down;
+				}
+				else
+				{
+					eDesiredLookDirection = EDirection::Up;
+
+				}
+				eDesiredAction = EAction::Move;
+			}
+			break;
+		case EDirection::Right:
+			if (GetPosX() > enemyBulletX && std::abs(GetPosY() - enemyBulletY) < 2)
+			{
+				if (GetPosY() > enemyBulletY)
+				{
+					eDesiredLookDirection = EDirection::Down;
+				}
+				else
+				{
+					eDesiredLookDirection = EDirection::Up;
+
+				}
+				eDesiredAction = EAction::Move;
+			}
+			break;
 		}
 	}
-	else // Dodge mode
+
+	else 
 	{
-		bool enemyBulletExists = false;
-		int enemyBulletX;
-		int enemyBulletY;
-		EDirection enemyBulletDirection;
-
-		if (bullet != nullptr)
+		if (GetBullet() == nullptr)
 		{
-			enemyBulletExists = true;
-			enemyBulletX = bullet->iX;
-			enemyBulletY = bullet->iY;
-			enemyBulletDirection = bullet->eDirection;
-		}
-		else
-		{
-			enemyBulletExists = false;
-		}
-
-		if (enemyBulletExists)
-		{
-			switch (enemyBulletDirection)
+			int targetX = pTarget->GetPosX();
+			int targetY = pTarget->GetPosY();
+			if (std::abs(GetPosX() - targetX) < 5)
 			{
-				case EDirection::Down:
-					if (GetPosY() > enemyBulletY && std::abs(GetPosX() - enemyBulletX < 4))
-					{
-						if (GetPosX() > enemyBulletX)
-						{
-							eDesiredLookDirection = EDirection::Right;
-						}
-						else
-						{
-							eDesiredLookDirection = EDirection::Left;
-							
-						}
-						eDesiredAction = EAction::Move;
-					}
-					break;
-				case EDirection::Up:
-					if (GetPosY() < enemyBulletY && std::abs(GetPosX() - enemyBulletX < 4))
-					{
-						if (GetPosX() > enemyBulletX)
-						{
-							eDesiredLookDirection = EDirection::Right;
-						}
-						else
-						{
-							eDesiredLookDirection = EDirection::Left;
+				if (GetPosY() > targetY)// I am below
+				{
+					eDesiredLookDirection = EDirection::Up;
+				}
+				else
+				{
+					eDesiredLookDirection = EDirection::Down;
+				}
+				if (std::abs(GetPosY() - targetY) < 10)
+				{
+					eDesiredAction = EAction::Shoot;
+				}
+				else
+				{
+					eDesiredAction = EAction::Move;
+				}
 
-						}
-						eDesiredAction = EAction::Move;
-					}
-					break;
-				case EDirection::Left:
-					if (GetPosX() < enemyBulletX && std::abs(GetPosY() - enemyBulletY < 2))
-					{
-						if (GetPosY() > enemyBulletY)
-						{
-							eDesiredLookDirection = EDirection::Down;
-						}
-						else
-						{
-							eDesiredLookDirection = EDirection::Up;
-
-						}
-						eDesiredAction = EAction::Move;
-					}
-					break;
-				case EDirection::Right:
-					if (GetPosX() > enemyBulletX && std::abs(GetPosY() - enemyBulletY) < 2)
-					{
-						if (GetPosY() > enemyBulletY)
-						{
-							eDesiredLookDirection = EDirection::Down;
-						}
-						else
-						{
-							eDesiredLookDirection = EDirection::Up;
-
-						}
-						eDesiredAction = EAction::Move;
-					}
-					break;
 			}
-		}
-		else
-		{
-			/*if (pt)eDesiredLookDirection = EDirection::Down;
-			eDesiredAction = EAction::Move;*/
+			else if (std::abs(GetPosY() - targetY) < 2) // Same height - ish
+			{
+				if (GetPosX() > targetX)
+				{
+					eDesiredLookDirection = EDirection::Left;
+				}
+				else
+				{
+					eDesiredLookDirection = EDirection::Right;
+
+				}
+				if (std::abs(GetPosX() - targetX) < 10)
+				{
+					eDesiredAction = EAction::Shoot;
+				}
+				else
+				{
+					eDesiredAction = EAction::Move;
+				}
+			}
+			else
+			{
+				if (std::abs(GetPosY() - targetY) < std::abs(GetPosX() - targetX))
+				{
+					if (GetPosY() < targetY)
+					{
+						eDesiredLookDirection = EDirection::Down;
+					}
+					else
+					{
+						eDesiredLookDirection = EDirection::Up;
+					}
+					eDesiredAction = EAction::Move;
+				}
+				else
+				{
+					if (GetPosX() < targetX)
+					{
+						eDesiredLookDirection = EDirection::Right;
+					}
+					else
+					{
+						eDesiredLookDirection = EDirection::Left;
+					}
+					eDesiredAction = EAction::Move;
+				}
+			}
 		}
 	}
 }
