@@ -8,20 +8,10 @@ TListNode::TListNode(const IData* _pData)
 }
 
 TListNode::TListNode(const TListNode& _tListNode)
+	: m_pData(_tListNode.m_pData)
+	, m_pNext(_tListNode.m_pNext)
 {
-	m_pNext = nullptr;
-	m_pData = nullptr;
 
-	if (_tListNode.m_pData)
-	{
-		m_pData = new IData();
-	}
-	else
-	{
-		m_pData = nullptr;
-	}
-
-	//printf("Node Copy Constructor\n");
 }
 
 

@@ -3,8 +3,7 @@
 class IData
 {
 public:
-	virtual void Print() = 0;
-	virtual IData* Clone() const = 0;
+	virtual void Print() const = 0;
 };
 
 class TListNode
@@ -28,8 +27,6 @@ public:
 	TList();
 
 	TList(const TList& _list);
-
-	//TList GetReverseList(TList _list);
 
 	unsigned int Size(); // Returns the number of elements in the list
 

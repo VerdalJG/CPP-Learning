@@ -3,7 +3,8 @@
 class Image
 {
 public:
-	int m_resolutionX, m_resolutionY = 0;
+	int m_resolutionX = 0;
+	int m_resolutionY = 0;
 	int m_colorDepth = 0;
 	int DrawRGBImage(unsigned char* buffer)
 	{
