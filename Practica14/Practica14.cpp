@@ -69,13 +69,14 @@ public:
     }
 
     int i = 1;
+    int* iPtr = &i;
 };
 
 
 int main()
 {
 
-    //a.¿Cuánto espacio ocupa la tabla de funciones virtuales ?
+// a.¿Cuánto espacio ocupa la tabla de funciones virtuales ?
 // 
 //   
 // 
@@ -89,6 +90,10 @@ int main()
 
     C oC = C();
     A* cPtr = &oC;
+
+    
+
+    
 
     printf("C Pointer: %p\n", cPtr);
 }
