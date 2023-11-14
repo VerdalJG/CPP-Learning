@@ -177,5 +177,13 @@ int main()
 		Sleep(100);
 		clear();
 	}
+
+	int (*funcPointer)(int, int) = &add;
+	funcPointer(2, 3);
+}
+
+int add(int a, int b)
+{
+	return (a + b);
 }
 

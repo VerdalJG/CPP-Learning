@@ -33,10 +33,6 @@ public:
     {
 
     }
-
-    
-
-    
     int a;
 };
 
@@ -138,9 +134,9 @@ int main()
 //
     cPtr->Print();
 
-    void (**vt)() = *(void(***)())cPtr;
-
-    printf("C Pointer: %p\n", cPtr);
+    void (**vt)() = *reinterpret_cast<void(***)()>(cPtr);
+    unsigned int sizeVt = static_cast<int>(sizeof(vt) / 4);
+    printf("Size of table: %d", sizeVt);
 }
 
 
