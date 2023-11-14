@@ -3,6 +3,27 @@
 class A
 {
 public:
+
+    virtual void Print()
+    {
+        printf("Implementation of Print A\n");
+    }
+
+    void Print2()
+    {
+        printf("Implementation of Print2 A\n");
+    }
+
+    virtual void Execute()
+    {
+        printf("Implementation of Execute A\n");
+    }
+
+    virtual void DoSomething()
+    {
+        printf("Implementation of DoSomething A\n");
+    }
+
     A() 
     {
         Print();
@@ -13,15 +34,10 @@ public:
 
     }
 
-    virtual void Print()
-    {
-        printf("Implementation of Print A\n");
-    }
+    
 
-    virtual void Print2()
-    {
-        printf("Implementation of Print2 A\n");
-    }
+    
+    int a;
 };
 
 class B : public A
@@ -41,6 +57,16 @@ public:
     {
         printf("Implementation of Print B\n");
     }*/
+
+    virtual void Execute() override
+    {
+        printf("Implementation of Execute B\n");
+    }
+
+    virtual void DoSomething() override
+    {
+        printf("Implementation of DoSomething B\n");
+    }
 };
 
 class C : public B
@@ -63,13 +89,23 @@ public:
 
     }
 
-    virtual void Print() override
+    void Print() override
     {
         printf("Implementation of Print C\n");
     }
 
+    void Execute() override
+    {
+        printf("Implementation of Execute C\n");
+    }
+
+    void DoSomething() override
+    {
+        printf("Implementation of DoSomething C\n");
+    }
+
     int i = 1;
-    int* iPtr = &i;
+    //int* iPtr = &i;
 };
 
 
@@ -79,6 +115,11 @@ int main()
 // a.¿Cuánto espacio ocupa la tabla de funciones virtuales ?
 // 
 //   
+// 
+
+// c.¿Cuánto espacio ocupa adicionalmente un objeto por tener una tabla de funciones virtuales ?
+// 
+//   Ocupa 8 bytes de espacio en 64 bit, y 4 bytes en 32 bit, el tamaño de un puntero
 // 
 
     unsigned int sizeA = static_cast<int>(sizeof(A));
@@ -91,9 +132,13 @@ int main()
     C oC = C();
     A* cPtr = &oC;
 
-    
+// e.Comparar la llamada a una función virtual con la llamada a una función novirtual.
+// ¿Cuántos pasos adicionales tienen que realizarse para llamar a una función cuando esta es virtual ?
+//
+//
+    cPtr->Print();
 
-    
+    void (**vt)() = *(void(***)())cPtr;
 
     printf("C Pointer: %p\n", cPtr);
 }
@@ -103,12 +148,4 @@ int main()
 // 
 //   La 
 // 
-// c.¿Cuánto espacio ocupa adicionalmente un objeto por tener una tabla de funciones virtuales ?
-// 
-//   Ocupa 8 bytes de espacio en 64 bit, y 4 bytes en 32 bit, el tamaño de un puntero
-// 
-// e.Comparar la llamada a una función virtual con la llamada a una función novirtual.
-// ¿Cuántos pasos adicionales tienen que realizarse para llamar a una función cuando esta es virtual ?
-//
-//
-//
+
