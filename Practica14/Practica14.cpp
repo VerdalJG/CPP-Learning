@@ -26,10 +26,17 @@ public:
 
     A() 
     {
+//   d.¿Qué pasa si llamo a un método virtual desde el constructor?
+// 
+//   Se llama el metodo adecuado de su propia clase si existe. Si no existe en la clase derivada
+//   y solo existe en la clase base, pues se llama en la base (mirar clases A y B). Esto es porque
+//   se crea la clase base primero, se llama el constructor, y el Print() de la clase C aún no existe.
+// 
+
         Print();
     }
 
-    ~A()
+    virtual ~A()
     {
 
     }
@@ -44,15 +51,10 @@ public:
         Print();
     }
 
-    ~B()
+    virtual ~B()
     {
 
     }
-
-    /*virtual void Print() override
-    {
-        printf("Implementation of Print B\n");
-    }*/
 
     virtual void Execute() override
     {
@@ -71,12 +73,7 @@ public:
     C()
     {
 
-// d.¿Qué pasa si llamo a un método virtual desde el constructor ?
-// 
-//   Se llama el metodo adecuado de su propia clase si existe. Si no existe en la clase derivada
-//   y solo existe en la clase base, pues se llama en la base (mirar clases A y B). Esto es porque
-//   se crea la clase base primero, se llama el constructor, y el Print() de la clase C aún no existe.
-// 
+
         Print();
     }
 
@@ -101,7 +98,6 @@ public:
     }
 
     int i = 1;
-    //int* iPtr = &i;
 };
 
 
@@ -110,12 +106,12 @@ int main()
 
 // a.¿Cuánto espacio ocupa la tabla de funciones virtuales ?
 // 
-//   
+// 
 // 
 
 // c.¿Cuánto espacio ocupa adicionalmente un objeto por tener una tabla de funciones virtuales ?
 // 
-//   Ocupa 8 bytes de espacio en 64 bit, y 4 bytes en 32 bit, el tamaño de un puntero
+//   Ocupa 8 bytes de espacio en 64 bit, y 4 bytes en 32 bit, el tamaño de un puntero.
 // 
 
     unsigned int sizeA = static_cast<int>(sizeof(A));
@@ -129,19 +125,29 @@ int main()
     A* cPtr = &oC;
 
 // e.Comparar la llamada a una función virtual con la llamada a una función novirtual.
-// ¿Cuántos pasos adicionales tienen que realizarse para llamar a una función cuando esta es virtual ?
+// ¿Cuántos pasos adicionales tienen que realizarse para llamar a una función cuando esta es virtual?
+//
 //
 //
     cPtr->Print();
 
     void (**vt)() = *reinterpret_cast<void(***)()>(cPtr);
-    unsigned int sizeVt = static_cast<int>(sizeof(vt) / 4);
-    printf("Size of table: %d", sizeVt);
+    
+    int iterator = 0;
+
+    while (*(vt + iterator) != NULL)
+    {
+        printf("Iterator: %d\n", iterator);
+        iterator++;
+    }
+    unsigned int sizeVt = static_cast<int>(sizeof(*vt));
+    printf("Size of table: %d\n", sizeVt);
 }
 
 
 // b.¿Dónde está situada la tabla de funciones virtuales ?
 // 
-//   La 
+//   La tabla de funciones virtuales están situadas en una parte de memoria read-only, ya que son estaticas para todas las instancias
+//   de una clase. Para acceder a ellas, se debe usar el puntero añadido a los objetos de clases virtuales "__vfptr"
 // 
 
