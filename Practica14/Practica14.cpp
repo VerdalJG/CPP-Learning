@@ -162,7 +162,8 @@ int main()
 
 // b.¿Dónde está situada la tabla de funciones virtuales ?
 // 
-//   La tabla de funciones virtuales están situadas en una parte de memoria read-only, ya que son estaticas para todas las instancias
-//   de una clase. Para acceder a ellas, se debe usar el puntero añadido a los objetos de clases virtuales "__vfptr"
+//   La tabla de funciones virtuales están situadas en una parte de memoria read-only, ya que son
+//   estaticas para todas las instancias de una clase. Para acceder a ellas, se debe usar 
+//   el puntero añadido a los objetos de clases virtuales "__vfptr".
 // 
 

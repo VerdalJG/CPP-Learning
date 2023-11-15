@@ -177,11 +177,11 @@ int main()
 		Sleep(100);
 		clear();
 	}
-
+	// Example
 	int (*funcPointer)(int, int) = &add;
 	funcPointer(2, 3);
 }
-
+// Example
 int add(int a, int b)
 {
 	return (a + b);
