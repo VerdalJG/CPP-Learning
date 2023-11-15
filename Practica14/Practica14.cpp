@@ -72,8 +72,6 @@ class C : public B
 public:
     C()
     {
-
-
         Print();
     }
 
@@ -106,7 +104,10 @@ int main()
 
 // a.¿Cuánto espacio ocupa la tabla de funciones virtuales ?
 // 
-// 
+//   Depurando con el puntero a puntero a funcion "vt", podemos ver que la tabla de funciones tiene
+//   punteros a las funciones virtuales de su clase, por lo tanto, la tabla ocupa 4 o 8 multiplicado
+//   por la cantidad de funciones virtuales. Luego dependiendo del compilador puede haber unos bytes
+//   de padding.
 // 
 
 // c.¿Cuánto espacio ocupa adicionalmente un objeto por tener una tabla de funciones virtuales ?
@@ -121,17 +122,31 @@ int main()
     printf("Size B: %u\n", sizeB);
     printf("Size C: %u\n", sizeC);
 
-    C oC = C();
-    A* cPtr = &oC;
+    
 
 // e.Comparar la llamada a una función virtual con la llamada a una función novirtual.
 // ¿Cuántos pasos adicionales tienen que realizarse para llamar a una función cuando esta es virtual?
 //
+//  Funcion virtual:
+//  - aPtr llama a Print() desde A
+//     - Como Print() es virtual, llama a Print() en la vTable
+//        - Desde la vTable se llama a la version derivada de Print(), lo cual es C::Print()
+//            - Se ejecuta Print2()
+// 
+//  Funcion no virtual:
+//  - aPtr llama a Print2() desde A
+//     - Se ejecuta Print2()
+//  
+//  La diferencia es de 2 pasos, se usa el vfPtr para ir a la tabla de funciones virtuales, y luego
+//  para llegar a la funcion de la clase derivada.
 //
-//
-    cPtr->Print();
+    C oC = C();
+    A* aPtr = &oC;
 
-    void (**vt)() = *reinterpret_cast<void(***)()>(cPtr);
+    aPtr->Print2();
+    aPtr->Print();
+
+    void (**vt)() = *reinterpret_cast<void(***)()>(aPtr);
     
     int iterator = 0;
 
