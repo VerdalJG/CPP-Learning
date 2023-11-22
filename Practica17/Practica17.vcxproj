@@ -142,6 +142,9 @@
   <ItemGroup>
     <ClCompile Include="Practica17.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Enum.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
