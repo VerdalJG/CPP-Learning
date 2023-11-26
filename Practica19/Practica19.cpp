@@ -1,6 +1,5 @@
 #include <iostream>
 #include "List.h"
-#include "List.cpp"
 
 int main()
 {
